@@ -8,5 +8,8 @@ router.route("/all").get(userController.getAllUsers);
 router.route("/random").get(userController.getRandomUser);
 //* save user
 router.route("/save").post(userController.saveAUser);
-
+//* delete user
+router.route("/delete").delete(userController.deleteAUser);
+//* update user
+router.route("/update").patch(userController.updateAUser);
 module.exports = router;

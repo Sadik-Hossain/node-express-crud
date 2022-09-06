@@ -1,4 +1,4 @@
-const users = require("../user.json");
+const users = require("../users.json");
 
 //* get all users
 const getAllUsers = (req, res) => {
@@ -29,8 +29,60 @@ const saveAUser = (req, res) => {
     res.send("Data has been saved");
   }
 };
+
+//* delete user
+const deleteAUser = (req, res) => {
+  const string = JSON.stringify(users);
+  const parsedUser = JSON.parse(string);
+  console.log(parsedUser);
+  const index = parsedUser.findIndex((object) => {
+    return object.id === req.body.id;
+  });
+
+  if (index == -1) {
+    res.send("Id not found");
+  } else {
+    users.splice(index, 1);
+    res.send("Successfully Deleted");
+  }
+};
+
+//* update user
+const updateAUser = (req, res) => {
+  const string = JSON.stringify(users);
+  const parsedUser = JSON.parse(string);
+
+  const i = parsedUser.findIndex((object) => {
+    return object.id == req.query.id;
+  });
+
+  if (i == -1) {
+    // console.log(i);
+    res.send("Id not found");
+  } else {
+    if (req.body.name != undefined) {
+      users[i].name = req.body.name;
+    }
+    if (req.body.gender != undefined) {
+      users[i].gender = req.body.gender;
+    }
+    if (req.body.address != undefined) {
+      users[i].address = req.body.address;
+    }
+    if (req.body.contact != undefined) {
+      users[i].contact = req.body.contact;
+    }
+    if (req.body.photoUrl != undefined) {
+      users[i].photoUrl = req.body.photoUrl;
+    }
+
+    res.send("Successfully Updated User");
+  }
+};
 module.exports = {
   getAllUsers,
   getRandomUser,
   saveAUser,
+  deleteAUser,
+  updateAUser,
 };
