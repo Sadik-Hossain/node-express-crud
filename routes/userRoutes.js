@@ -6,5 +6,7 @@ const router = express.Router();
 router.route("/all").get(userController.getAllUsers);
 //* random user
 router.route("/random").get(userController.getRandomUser);
+//* save user
+router.route("/save").post(userController.saveAUser);
 
 module.exports = router;

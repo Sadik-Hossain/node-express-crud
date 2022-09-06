@@ -12,7 +12,25 @@ const getRandomUser = (req, res) => {
 
   res.send(parsedUser[Math.floor(Math.random() * parsedUser.length)]);
 };
+
+//* save a user
+const saveAUser = (req, res) => {
+  if (
+    req.body.id == undefined ||
+    req.body.gender == undefined ||
+    req.body.name == undefined ||
+    req.body.contact == undefined ||
+    req.body.address == undefined ||
+    req.body.photoUrl == undefined
+  ) {
+    res.send("A value is missing");
+  } else {
+    users.push(req.body);
+    res.send("Data has been saved");
+  }
+};
 module.exports = {
   getAllUsers,
   getRandomUser,
+  saveAUser,
 };
